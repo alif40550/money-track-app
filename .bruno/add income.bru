@@ -1,0 +1,23 @@
+meta {
+  name: add income
+  type: http
+  seq: 2
+}
+
+post {
+  url: http://localhost:3000/incomes/create
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "name": "Gaji bulanan",
+    "amount" : 15000000
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
