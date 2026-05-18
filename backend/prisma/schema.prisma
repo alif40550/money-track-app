@@ -12,31 +12,31 @@ datasource db {
   provider = "postgresql"
 }
 
-model User{
-  id          String @id @default(uuid())
-  email       String @unique
-  name        String
-  photo       String?
-  created_at  DateTime @default(now()) 
+model User {
+  id         String   @id @default(uuid())
+  email      String   @unique
+  name       String
+  photo      String?
+  created_at DateTime @default(now())
 
-  incomes     Income[]
-  expenses    Expense[]
+  incomes  Income[]
+  expenses Expense[]
 }
 
-model Income{
-  id          Int     @id @default(autoincrement())  
-  user_id     String 
-  name        String
-  amount      Int
+model Income {
+  id      Int    @id @default(autoincrement())
+  user_id String
+  name    String
+  amount  Int
 
-  user        User @relation(fields: [user_id], references: [id])
+  user User @relation(fields: [user_id], references: [id])
 }
 
-model Expense{
-  id          Int     @id @default(autoincrement())
-  user_id     String  
-  name        String  
-  amount      Float
+model Expense {
+  id      Int    @id @default(autoincrement())
+  user_id String
+  name    String
+  amount  Float
 
-  user        User @relation(fields: [user_id], references: [id])
+  user User @relation(fields: [user_id], references: [id])
 }

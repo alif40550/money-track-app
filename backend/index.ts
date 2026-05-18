@@ -1,5 +1,5 @@
 import express from "express";
-import incomeRouter from './routes/incomeRoutes.js';
+import incomeRouter from './routes/income.routes.js';
 import type { Request, Response } from "express";
 import 'dotenv/config';
 

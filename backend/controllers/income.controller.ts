@@ -1,6 +1,10 @@
 import type { Request, Response } from "express";
 import { prisma } from "../lib/prisma.js";
 
+// dummy userId before auth feature
+import 'dotenv/config';
+const userId = process.env.DUMMY_USER_ID;
+
 export const getAll = async (req: Request, res: Response) => {
   try {
     const data = await prisma.income.findMany();
@@ -47,6 +51,11 @@ export const create = async (req: Request, res: Response) => {
       data: {
         name: name,
         amount: amount,
+        user: {
+          connect: {
+            id: userId,
+          }
+        }
       }
     });
     res.status(200).json({
