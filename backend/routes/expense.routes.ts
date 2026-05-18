@@ -1,14 +1,12 @@
 import { Router } from "express";
+import { validate } from "../middlewares/validate.request.js";
+import { CreateFlowSchema } from "../validators/flow.validator.js";
+import { get, getAll, create } from "../controllers/expense.controller.js";
 
-class ExpenseRoutes {
-  router: Router;
-  routes: string;
-  method: string;
-  constructor(router: Router, routes: string, method: string) {
-    this.router = router;
-    this.routes = routes;
-    this.method = method;
-  }
-}
+const expenseRouter = Router();
 
-export default ExpenseRoutes;
+expenseRouter.get('/expenses', getAll);
+expenseRouter.get('/expenses/:id', get);
+expenseRouter.post('/expenses', validate(CreateFlowSchema), create);
+
+export default expenseRouter;

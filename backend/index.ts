@@ -1,5 +1,6 @@
 import express from "express";
 import incomeRouter from './routes/income.routes.js';
+import expenseRouter from './routes/expense.routes.js';
 import type { Request, Response, NextFunction } from "express";
 import 'dotenv/config';
 
@@ -14,6 +15,7 @@ app.get('/', (req: Request, res: Response) => {
 });
 
 app.use(incomeRouter);
+app.use(expenseRouter);
 
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {
   console.error(err);
