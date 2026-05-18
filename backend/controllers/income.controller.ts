@@ -1,70 +1,42 @@
 import type { Request, Response } from "express";
-import { prisma } from "../lib/prisma.js";
+import { asyncHandler } from "../middlewares/async.handlers.js";
+import { getAllIncomes, getIncome, createIncome } from "../repositories/income.repositories.js";
 
 // dummy userId before auth feature
 import 'dotenv/config';
 const userId = process.env.DUMMY_USER_ID;
 
-export const getAll = async (req: Request, res: Response) => {
-  try {
-    const data = await prisma.income.findMany();
-    res.status(200).json({
-      'data': { data },
-    });
-  } catch (error) {
-    console.error("IncomeContoller.getALl error: ", error);
-    res.status(500).json({
-      'error': error
-    });
-  }
+export const getAll = asyncHandler(async (req: Request, res: Response) => {
+  const data = await getAllIncomes();
+  res.status(200).json({
+    'incomes': data,
+  });
   return;
-}
+});
 
-export const get = async (req: Request, res: Response) => {
-  try {
-    const { id } = req.params;
+export const get = asyncHandler(async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const numericId = parseInt(id);
+  const data = await getIncome(numericId);
 
-    const numericId = parseInt(id as string, 10);
-    const data = await prisma.income.findUnique({
-      where: {
-        id: numericId
-      }
+  if (!data) {
+    res.status(404).json({
+      'status': 'not found',
     });
+    return;
+  };
 
-    res.status(200).json({
-      'data': { data },
-    });
-  } catch (error) {
-    console.error('IncomeController.get error: ', error);
-    res.status(500).json({
-      'error': error
-    });
-  }
+  res.status(200).json({
+    'income': data,
+  });
   return;
-}
+});
 
-export const create = async (req: Request, res: Response) => {
-  try {
-    const { name, amount } = req.body;
+export const create = asyncHandler(async (req: Request, res: Response) => {
+  const newData = await createIncome(req.body, userId);
 
-    await prisma.income.create({
-      data: {
-        name: name,
-        amount: amount,
-        user: {
-          connect: {
-            id: userId,
-          }
-        }
-      }
-    });
-    res.status(200).json({
-      'status': 'OK',
-    });
-  } catch (error) {
-    console.error('IncomeController.create error: ', error);
-    res.status(500).json({
-      'error': error
-    });
-  }
-}
+  res.status(200).json({
+    'status': 'OK',
+    'data': newData,
+  });
+});

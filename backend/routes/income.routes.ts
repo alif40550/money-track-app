@@ -6,7 +6,7 @@ import { get, getAll, create } from "../controllers/income.controller.js";
 const incomeRouter = Router();
 
 incomeRouter.get('/incomes', getAll);
-incomeRouter.get('/income/:id', get);
-incomeRouter.post('/incomes/create', validate(CreateIncomeSchema), create);
+incomeRouter.get('/incomes/:id', get);
+incomeRouter.post('/incomes', validate(CreateIncomeSchema), create);
 
 export default incomeRouter;
