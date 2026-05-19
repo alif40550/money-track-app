@@ -1,11 +1,11 @@
 import { prisma } from "../lib/prisma.js";
 import type { flow } from "../models/flow.models.js";
 
-export const getAllIncomes = async () => {
+export const findMany = async () => {
   return prisma.income.findMany();
 }
 
-export const getIncome = async (id: number) => {
+export const findById = async (id: number) => {
   return await prisma.income.findUnique({
     where: {
       id: id
@@ -13,7 +13,7 @@ export const getIncome = async (id: number) => {
   });
 }
 
-export const createIncome = async (incomeData: flow, userId: string) => {
+export const insert = async (incomeData: flow, userId: string) => {
   const { name, amount } = incomeData;
 
   return await prisma.income.create({

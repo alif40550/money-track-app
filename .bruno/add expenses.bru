@@ -1,18 +1,18 @@
 meta {
-  name: add income
+  name: add expenses
   type: http
-  seq: 2
+  seq: 6
 }
 
 post {
-  url: http://localhost:3000/incomes
+  url: http://localhost:3000/expenses
   body: json
   auth: inherit
 }
 
 body:json {
   {
-    "name": "Gaji bulanan",
+    "name": "Jalanan",
     "amount" : 15000000
   }
 }

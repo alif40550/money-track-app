@@ -1,0 +1,16 @@
+meta {
+  name: get income
+  type: http
+  seq: 4
+}
+
+get {
+  url: http://localhost:3000/incomes/2
+  body: none
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

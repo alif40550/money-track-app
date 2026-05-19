@@ -1,6 +1,6 @@
 import type { Request, Response } from "express";
 import { asyncHandler } from "../middlewares/async.handlers.js";
-import { getAllIncomes, getIncome, createIncome } from "../repositories/income.repositories.js";
+import { getAllIncomes, getIncome, createIncome } from "../services/income.service.js";
 
 // dummy userId before auth feature
 import 'dotenv/config';
@@ -16,8 +16,7 @@ export const getAll = asyncHandler(async (req: Request, res: Response) => {
 
 export const get = asyncHandler(async (req: Request, res: Response) => {
   const { id } = req.params;
-  const numericId = parseInt(id);
-  const data = await getIncome(numericId);
+  const data = await getIncome(id);
 
   if (!data) {
     res.status(404).json({

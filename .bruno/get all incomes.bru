@@ -1,20 +1,13 @@
 meta {
-  name: add income
+  name: get all incomes
   type: http
-  seq: 2
+  seq: 3
 }
 
-post {
+get {
   url: http://localhost:3000/incomes
-  body: json
+  body: none
   auth: inherit
-}
-
-body:json {
-  {
-    "name": "Gaji bulanan",
-    "amount" : 15000000
-  }
 }
 
 settings {
