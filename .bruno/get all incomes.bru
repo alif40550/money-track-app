@@ -7,7 +7,11 @@ meta {
 get {
   url: http://localhost:3000/incomes
   body: none
-  auth: inherit
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ZWM1ZmZhZC1mYzAyLTQ3YzQtYjJjNi1iNjU4ZjlmNTEyOGUiLCJlbWFpbCI6ImFsaWY0MDU1MEBnbWFpbC5jb20iLCJpYXQiOjE3NzkyNDQxOTksImV4cCI6MTc3OTg0ODk5OX0.QxToUJppGiIuX2cPm2uhV9qakZJjJcbiv_KgmKldXg8
 }
 
 settings {

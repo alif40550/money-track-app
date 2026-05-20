@@ -3,3 +3,8 @@ export type user = {
   name: string,
   photo?: string | null
 }
+
+export type JWTPayload = {
+  userId: string,
+  email: string
+}
