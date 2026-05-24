@@ -1,2 +1,0 @@
-
-../../generated / prisma / client.js
